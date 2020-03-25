@@ -1,4 +1,4 @@
-[![Progress](https://img.shields.io/badge/required-Yii2_v2.0.13-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Progress](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
 [![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-widgets/total.svg)](https://GitHub.com/wdmg/yii2-widgets/releases/)
 [![GitHub version](https://badge.fury.io/gh/wdmg/yii2-widgets.svg)](https://github.com/wdmg/yii2-widgets)
 ![Progress](https://img.shields.io/badge/progress-in_development-red.svg)
@@ -18,7 +18,7 @@ The same as in the case of `NavContents::widget()`, but the usual `<ul>` list is
 
 # Requirements 
 * PHP 5.6 or higher
-* Yii2 v.2.0.20 and newest
+* Yii2 v.2.0.33 and newest
 
 # Installation
 To install the widgets, run the following command in the console:
@@ -70,4 +70,5 @@ Example of usecase MenuContents::widget() in view instance:
     
 
 # Status and version [in progress development]
+* v.1.0.1 - Up to date dependencies
 * v.1.0.0 - Added NavContents::widget() and MenuContents::widget()
