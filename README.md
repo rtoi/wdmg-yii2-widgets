@@ -68,7 +68,30 @@ Example of usecase MenuContents::widget() in view instance:
         ... // and other options for yii\widgets\Menu::widget()
     ]); ?>
     
+Example of usecase LangSwitcher::widget() in view instance of dashboard:
+
+    <?php
+    
+    use wdmg\widgets\LangSwitcher;
+    
+    <?php
+        echo LangSwitcher::widget([
+            'label' => 'Language version',
+            'model' => $model,
+            'renderWidget' => 'button-group',
+            'createRoute' => 'news/create',
+            'updateRoute' => 'news/update',
+            'supportLocales' => $this->context->module->supportLocales,
+            'versions' => (isset($model->source_id)) ? $model->getAllVersions($model->source_id, true) : $model->getAllVersions($model->id, true),
+            'options' => [
+                'id' => 'locale-switcher',
+                'class' => 'pull-right'
+            ]
+        ]);
+    ?>
+    
 
 # Status and version [in progress development]
+* v.1.0.2 - Added LangSwitcher::widget()
 * v.1.0.1 - Up to date dependencies
 * v.1.0.0 - Added NavContents::widget() and MenuContents::widget()
