@@ -130,20 +130,23 @@ class AliasInput extends InputWidget
                     var collapseView = $('#collapseView-$this->id').collapse({
                         toggle: false
                     });
+                    
                     var collapseEdit = $('#collapseEdit-$this->id').collapse({
                         toggle: false
                     });
                     
+                    var aliasInput = collapseEdit.find('input');
+                    
                     collapseView.on('show.bs.collapse', function () {
                         collapseEdit.collapse('hide');
                         
-                        var alias = collapseEdit.find('input').val();
+                        var alias = aliasInput.val();
                         var url = collapseView.find('a').data('base') + "/" + alias;
                         collapseView.find('a').attr('href', url).text(url);
                         
                     }).on('hidden.bs.collapse', function () {
                         collapseEdit.collapse('show');
-                        collapseEdit.find('input').focus();
+                        aliasInput.focus();
                     });
                     
                     collapseEdit.on('show.bs.collapse', function () {
@@ -152,6 +155,11 @@ class AliasInput extends InputWidget
                         collapseView.collapse('show');
                     });
                     
+                    aliasInput.on('change', function(e) {
+                        var alias = e.target.value;
+                        var url = collapseView.find('a').data('base') + "/" + alias;
+                        collapseView.find('a').attr('href', url).text(url);
+                    });
                 }
                 aliasEditor();
                 
