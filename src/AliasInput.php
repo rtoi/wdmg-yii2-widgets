@@ -6,7 +6,7 @@ namespace wdmg\widgets;
  * Yii2 Alias Input
  *
  * @category        Widgets
- * @version         1.0.3
+ * @version         1.0.4
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-widgets
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine

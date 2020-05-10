@@ -79,8 +79,8 @@ Example of usecase LangSwitcher::widget() in view instance of dashboard:
             'label' => 'Language version',
             'model' => $model,
             'renderWidget' => 'button-group',
-            'createRoute' => 'news/create',
-            'updateRoute' => 'news/update',
+            'createRoute' => 'news/create', // string or array
+            'updateRoute' => 'news/update', // string or array
             'supportLocales' => $this->context->module->supportLocales,
             'versions' => (isset($model->source_id)) ? $model->getAllVersions($model->source_id, true) : $model->getAllVersions($model->id, true),
             'options' => [
@@ -109,6 +109,7 @@ Example of usecase AliasInput::widget() in view instance of dashboard:
     
 
 # Status and version [in progress development]
+* v.1.0.4 - URL`s options in LangSwitcher
 * v.1.0.3 - Added AliasInput::widget()
 * v.1.0.2 - Added LangSwitcher::widget()
 * v.1.0.1 - Up to date dependencies

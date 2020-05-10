@@ -4,7 +4,7 @@
   "keywords": ["yii", "yii2", "extension", "widgets", "bootstrap", "widget", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/wdmg/yii2-widgets",
   "support": {
     "source": "https://github.com/wdmg/yii2-widgets",
