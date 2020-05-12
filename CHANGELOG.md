@@ -1,7 +1,8 @@
 Changelog
 =========
 
-## 1.0.4 (2020-05-11)
+## 1.0.4 (2020-05-12)
+ * Added `primaryKey` param in LangSwitcher
  * URL`s options in LangSwitcher
 
 ## 1.0.3 (2020-04-16)

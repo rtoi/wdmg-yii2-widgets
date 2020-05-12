@@ -27,6 +27,7 @@ class LangSwitcher extends Widget
     public $label;
     public $model;
     public $renderWidget; // `nav`, `button-group`, `button-dropdown` or null (default `ul` based list)
+    public $primaryKey = 'id';
     public $createRoute;
     public $updateRoute;
     //public $currentLocale;
@@ -197,9 +198,9 @@ class LangSwitcher extends Widget
 
                         $updateRoute = null;
                         if (is_string($this->updateRoute))
-                            $updateRoute = Url::to([$this->updateRoute, 'id' => $version['id']]);
+                            $updateRoute = Url::to([$this->updateRoute, $this->primaryKey => $version[$this->primaryKey]]);
                         else if (is_array($this->updateRoute))
-                            $updateRoute = Url::to(ArrayHelper::merge($this->updateRoute, ['id' => $version['id']]));
+                            $updateRoute = Url::to(ArrayHelper::merge($this->updateRoute, [$this->primaryKey => $version[$this->primaryKey]]));
 
                         $list[] = [
                             'name' => $locale['name'],
@@ -262,15 +263,15 @@ class LangSwitcher extends Widget
 
                     $updateRoute = null;
                     if (is_string($this->updateRoute))
-                        $updateRoute = Url::to([$this->updateRoute, 'id' => $version['id']]);
+                        $updateRoute = Url::to([$this->updateRoute, $this->primaryKey => $version[$this->primaryKey]]);
                     else if (is_array($this->updateRoute))
-                        $updateRoute = Url::to(ArrayHelper::merge($this->updateRoute, ['id' => $version['id']]));
+                        $updateRoute = Url::to(ArrayHelper::merge($this->updateRoute, [$this->primaryKey => $version[$this->primaryKey]]));
 
                     $list[] = [
                         'name' => $language,
                         'label' => $language,
-                        'url' => Url::to([$this->updateRoute, 'id' => $version['id']]),
-                        'active' => $updateRoute,
+                        'url' => $updateRoute,
+                        'active' => ($this->model->locale == $version['locale']),
                         'exist' => true,
                         'title' => Yii::t('app/modules/base', 'Edit language version: {language}', [
                             'language' => $language
