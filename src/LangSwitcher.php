@@ -28,9 +28,10 @@ class LangSwitcher extends Widget
     public $model;
     public $renderWidget; // `nav`, `button-group`, `button-dropdown` or null (default `ul` based list)
     public $primaryKey = 'id';
+    public $sourceKey = 'source_id';
     public $createRoute;
     public $updateRoute;
-    //public $currentLocale;
+    public $currentLocale;
     public $supportLocales;
     public $versions;
 
@@ -41,6 +42,8 @@ class LangSwitcher extends Widget
         if (!isset($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
+        
+        self::initI18N('app/widgets');
     }
 
     public function run() {
@@ -208,7 +211,7 @@ class LangSwitcher extends Widget
                             'url' => $updateRoute,
                             'active' => ($this->model->locale == $locale['locale']) ? true : false,
                             'exist' => true,
-                            'title' => Yii::t('app/modules/base', 'Edit language version: {language}', [
+                            'title' => Yii::t('app/widgets', 'Edit language version: {language}', [
                                 'language' => $locale['name']
                             ]),
                         ];
@@ -230,10 +233,12 @@ class LangSwitcher extends Widget
                     ]);
 
                     $createRoute = null;
+                    $primaryKey = $this->primaryKey;
+                    $sourceKey = $this->sourceKey;
                     if (is_string($this->createRoute))
-                        $createRoute = Url::to([$this->createRoute, 'source_id' => (($this->model->source_id) ? $this->model->source_id : $this->model->id), 'locale' => $locale['locale']]);
+                        $createRoute = Url::to([$this->createRoute, $sourceKey => (($this->model->$sourceKey) ? $this->model->$sourceKey : $this->model->$primaryKey), 'locale' => $locale['locale']]);
                     else if (is_array($this->createRoute))
-                        $createRoute = Url::to(ArrayHelper::merge($this->createRoute, ['source_id' => (($this->model->source_id) ? $this->model->source_id : $this->model->id), 'locale' => $locale['locale']]));
+                        $createRoute = Url::to(ArrayHelper::merge($this->createRoute, [$sourceKey => (($this->model->$sourceKey) ? $this->model->$sourceKey : $this->model->$primaryKey), 'locale' => $locale['locale']]));
 
                     if (!in_array($locale['locale'], $existing, true)) {
                         $list[] = [
@@ -242,7 +247,7 @@ class LangSwitcher extends Widget
                             'url' => $createRoute,
                             'active' => ($this->model->locale == $locale['locale']) ? true : false,
                             'exist' => false,
-                            'title' => Yii::t('app/modules/base', 'Add language version: {language}', [
+                            'title' => Yii::t('app/widgets', 'Add language version: {language}', [
                                 'language' => $locale['name']
                             ]),
                         ];
@@ -273,7 +278,7 @@ class LangSwitcher extends Widget
                         'url' => $updateRoute,
                         'active' => ($this->model->locale == $version['locale']),
                         'exist' => true,
-                        'title' => Yii::t('app/modules/base', 'Edit language version: {language}', [
+                        'title' => Yii::t('app/widgets', 'Edit language version: {language}', [
                             'language' => $language
                         ]),
                     ];
@@ -292,10 +297,12 @@ class LangSwitcher extends Widget
                             $language = $locale;
 
                         $createRoute = null;
+                        $primaryKey = $this->primaryKey;
+                        $sourceKey = $this->sourceKey;
                         if (is_string($this->createRoute))
-                            $createRoute = Url::to([$this->createRoute, 'source_id' => (($this->model->source_id) ? $this->model->source_id : $this->model->id), 'locale' => $locale]);
+                            $createRoute = Url::to([$this->createRoute, $sourceKey => (($this->model->$sourceKey) ? $this->model->$sourceKey : $this->model->$primaryKey), 'locale' => $locale]);
                         else if (is_array($this->createRoute))
-                            $createRoute = Url::to(ArrayHelper::merge($this->createRoute, ['source_id' => (($this->model->source_id) ? $this->model->source_id : $this->model->id), 'locale' => $locale]));
+                            $createRoute = Url::to(ArrayHelper::merge($this->createRoute, [$sourceKey => (($this->model->$sourceKey) ? $this->model->$sourceKey : $this->model->$primaryKey), 'locale' => $locale]));
 
                         if (!in_array((isset($locale['locale']) ? $locale['locale'] : $locale), $existing, true)) {
                             $list[] = [
@@ -304,7 +311,7 @@ class LangSwitcher extends Widget
                                 'url' => $createRoute,
                                 'active' => ($this->model->locale == $locale),
                                 'exist' => false,
-                                'title' => Yii::t('app/modules/base', 'Add language version: {language}', [
+                                'title' => Yii::t('app/widgets', 'Add language version: {language}', [
                                     'language' => $language
                                 ]),
                             ];
@@ -314,5 +321,20 @@ class LangSwitcher extends Widget
             }
         }
         return $list;
+    }
+    
+    /**
+     * Initialize translations
+     */
+    private static function initI18N($category)
+    {
+        if (!empty(Yii::$app->i18n->translations['app/widgets']))
+            return;
+
+        Yii::$app->i18n->translations['app/widgets'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'en-US',
+            'basePath' => '@vendor/wdmg/yii2-widgets/messages',
+        ];
     }
 }
