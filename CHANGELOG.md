@@ -1,7 +1,8 @@
 Changelog
 =========
 
-## 1.0.*
+## 1.1.0 (2023-07-07)
+ * Update copyrights
  * Widget translations
 
 ## 1.0.4 (2020-05-12)

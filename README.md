@@ -109,6 +109,7 @@ Example of usecase AliasInput::widget() in view instance of dashboard:
     
 
 # Status and version [in progress development]
+* v.1.1.0 - Update copyrights
 * v.1.0.4 - URL`s options in LangSwitcher
 * v.1.0.3 - Added AliasInput::widget()
 * v.1.0.2 - Added LangSwitcher::widget()
