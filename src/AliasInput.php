@@ -20,7 +20,6 @@ use yii\widgets\InputWidget;
 
 class AliasInput extends InputWidget
 {
-
     public $labels;
 
     /**
@@ -49,7 +48,7 @@ class AliasInput extends InputWidget
 
         $base = null;
         if (!is_null($url)) {
-            $base = str_replace($value, '', $url);
+            $base = str_replace($value ?? '', '', $url);
             $base = rtrim($base, '/');
         }
 
